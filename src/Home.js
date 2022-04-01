@@ -9,7 +9,6 @@ const Home = () => {
     const diaryList = useContext(DiaryStateContext);
     const [data, setData] = useState([]);
     const [month, setMonth] = useState(new Date());
-    console.log(diaryList);
     const headText = `${month.getFullYear()}년 ${month.getMonth()}월`
 
     useEffect(()=>{

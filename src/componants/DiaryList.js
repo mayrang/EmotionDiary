@@ -42,9 +42,9 @@ const DiaryList = ({diaryList}) => {
         const filteredList = sortEmotion === "all" ? copyList : copyList.filter((it) => filterCallBack(it));
         let sortedList = []
         if(sortDate === "latest"){
-            sortedList = filteredList.sort((a, b) => parseInt(a.date) -parseInt(b.date));
+            sortedList = filteredList.sort((a, b) => parseInt(b.date) -parseInt(a.date));
         }else{
-            sortedList = filteredList.sort((a,b) => parseInt(b.date) - parseInt(a.date));
+            sortedList = filteredList.sort((a,b) => parseInt(a.date) - parseInt(b.date));
         }
         return sortedList;
     }

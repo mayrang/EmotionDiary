@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import MyButton from "./MyButton";
 
 const DiaryItem = ({id, name, content, emotion, date}) => {
     const env = process.env;
@@ -28,7 +29,7 @@ const DiaryItem = ({id, name, content, emotion, date}) => {
                 </div>
             </div>
             <div className="btn_wrapper">
-                <button onClick={getEdit}>수정하기</button>
+                <MyButton type={"default"} onClick={getEdit} text={"수정하기"} />
             </div>
         </div>
     );

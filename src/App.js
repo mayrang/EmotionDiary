@@ -15,8 +15,9 @@ const reducer = (state, action) => {
     case "INIT":
       return action.data;
     case "CREATE":
+      console.log(action.data)
       newData = [
-        ...action.data,
+        action.data,
         ...state
       ]
       break;
@@ -70,14 +71,14 @@ const dummyData = [
 
 function App() {
 
-  const diaryId = useRef(1);
+
+  const diaryId = useRef(parseInt(dummyData[dummyData.length -1].id)+1);
   
   const [data, dispatch] = useReducer(reducer, dummyData);
 
-  const onCreate = useCallback((name, content, date, emotion) => {
+  const onCreate = useCallback((content, date, emotion) => {
     const newData = {
       id: diaryId.current,
-      name,
       content,
       emotion,
       date: new Date(date).getTime()

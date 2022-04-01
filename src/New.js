@@ -1,7 +1,9 @@
+import DiaryEditor from "./componants/DiaryEditor";
+
 const New = () => {
     return (
         <div>
-            <h2>일기 생성 페이지</h2>
+            <DiaryEditor />
         </div>
     );
 }
