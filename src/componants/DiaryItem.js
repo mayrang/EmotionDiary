@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
 
-const DiaryItem = ({id, name, content, emotion, date}) => {
+const DiaryItem = ({id, content, emotion, date}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
 

@@ -11,6 +11,10 @@ const Diary = () => {
     const navigate = useNavigate();
     const [data, setData] = useState();
     const diaryList = useContext(DiaryStateContext);
+    useEffect(() => {
+        const titleElement = document.getElementsByTagName("title")[0];
+        titleElement.innerHTML = "상세보기";
+    }, []);
     useEffect(()=>{
         const targetData = diaryList.find((it) => parseInt(it.id) === parseInt(id));
         if(targetData){

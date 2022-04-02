@@ -18,7 +18,7 @@ const EmotionItem = React.memo(({onClick, emotion_id, emotion_src, emotion_descr
 
 const DiaryEditor = ({isEdit, originData}) => {
     const textRef = useRef();
-    const {onCreate, onEdit} = useContext(DiaryDispatctContext);
+    const {onCreate, onEdit, onRemove} = useContext(DiaryDispatctContext);
     const [content, setContent] = useState("");
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
     const [emotion, setEmotion] = useState(3);
@@ -43,6 +43,11 @@ const DiaryEditor = ({isEdit, originData}) => {
         setContent(e.target.value);
     }, []);
 
+    const handleRemove = () => {
+        onRemove(parseInt(originData.id));
+        navigate(-1, {replace:true});
+    };
+
     const handleSubmit = () => {
         if(content.length < 5){
             textRef.current.focus();
@@ -65,7 +70,8 @@ const DiaryEditor = ({isEdit, originData}) => {
 
     return (
         <div className="DiaryEditor">
-            <MyHeader headText={isEdit ? "일기 수정" : "새 일기쓰기"} leftChild={<MyButton type={"positive"} onClick={() => navigate(-1)} text={"뒤로 가기"}/>} />
+            <MyHeader headText={isEdit ? "일기 수정" : "새 일기쓰기"} leftChild={<MyButton type={"positive"} onClick={() => navigate(-1)} text={"뒤로 가기"}/>} 
+            rightChild={isEdit && <MyButton type={"negative"} onClick={handleRemove} text={"삭제하기"} />}/>
             <section>
                 <div className="input_box">
                     <h4>오늘은 며칠인가요?</h4>
