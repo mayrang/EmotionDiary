@@ -48,6 +48,7 @@ const DiaryList = ({diaryList}) => {
         }
         return sortedList;
     }
+
     return (
         <div className="DiaryList">
             <div className="menu_wrapper">

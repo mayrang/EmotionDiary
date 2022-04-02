@@ -24,6 +24,7 @@ const Home = () => {
     const monthDecrease = useCallback(() => {
         setMonth(new Date(month.getFullYear(), month.getMonth()-1));
     }, [month]);
+
     return (
         <div>
             <MyHeader leftChild={<MyButton text={"<"} onClick={monthDecrease} />} headText={headText} rightChild={<MyButton text={">"} onClick={monthIncrease} />} />

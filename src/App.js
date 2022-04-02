@@ -22,14 +22,12 @@ const reducer = (state, action) => {
       ]
       break;
     case "REMOVE":
-      newData = [
-        state.filter((it) => it.id !== action.targetId)
-      ]
+      newData = state.filter((it) => it.id !== action.targetId);
       break;
     case "EDIT":
-      newData = [
-        state.map((it) => it.id === action.targetId ? {...action.newContent} : it)
-      ]
+      newData =  state.map((it) => it.id === action.data.id ? {...action.data} : it)
+      
+      console.log(newData);
       break;
     default:
       return state;
@@ -42,27 +40,22 @@ export const DiaryDispatctContext = React.createContext();
 
 const dummyData = [
   {id: 1,
-  name: "박건상",
   content: "오늘의 일기 1",
   date: 1648624312816,
   emotion: 1},
   {id: 2,
-  name: "김길동",
   content: "오늘의 일기 2",
   date: 1648624312817,
   emotion: 2},
   {id: 3,
-  name: "홍길동",
   content: "오늘의 일기 3",
   date: 1648624312818,
   emotion: 3},
   {id: 4,
-  name: "제갈길동",
   content: "오늘의 일기 4",
   date: 1648624312819,
   emotion: 1},
   {id: 5,
-  name: "폰길동",
   content: "오늘의 일기 5",
   date: 1648624312820,
   emotion: 5},
@@ -87,10 +80,9 @@ function App() {
     diaryId.current += 1;
   }, []);
 
-  const onEdit = useCallback((targetId, name, content, emotion, date) => {
+  const onEdit = useCallback((targetId, content, emotion, date) => {
     const editData = {
       id: targetId,
-      name,
       content,
       emotion,
       date: new Date(date).getTime()
@@ -117,7 +109,7 @@ function App() {
       <Routes>
        <Route path="/" element={<Home />} />
        <Route path="/new" element={<New />} />
-       <Route path="/edit" element={<Edit />} />
+       <Route path="/edit/:id" element={<Edit />} />
        <Route path="/diary" element={<Diary />} />
      </Routes>
     </div>

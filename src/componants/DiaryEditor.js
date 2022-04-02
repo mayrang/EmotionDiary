@@ -1,4 +1,4 @@
-import {useContext, useState, useRef} from "react";
+import {useContext, useState, useRef, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatctContext } from "../App.js";
 import MyButton from "./MyButton.js";
@@ -40,14 +40,22 @@ const EmotionItem = ({onClick, emotion_id, emotion_src, emotion_description, isS
 }
 
 
-const DiaryEditor = () => {
+const DiaryEditor = ({isEdit, originData}) => {
     const textRef = useRef();
-    const {onCreate} = useContext(DiaryDispatctContext);
+    const {onCreate, onEdit} = useContext(DiaryDispatctContext);
     const [content, setContent] = useState("");
     const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
     const [emotion, setEmotion] = useState(3);
+    useEffect(()=> {
+        if(isEdit){
+            setContent(originData.content);
+            setDate(new Date(parseInt(originData.date)).toISOString().slice(0, 10));
+            setEmotion(parseInt(originData.emotion));
+        }
+        
+    }, [originData, isEdit]);
     const changeDate = (e) => {
-        setDate(e.target.vlaue);
+        setDate(e.target.value);
     }
     const navigate = useNavigate();
 
@@ -65,15 +73,23 @@ const DiaryEditor = () => {
             return;
         }else{
             
-
-            onCreate(content, date, emotion);
-            navigate("/", {replace:true});
+            if(window.confirm(isEdit ? "일기를 수정하시겠습니까?" : "일기를 저장하시겠습니까?")){
+                if(isEdit){
+                    onEdit(parseInt(originData.id), content, emotion, date);
+                    navigate("/", {replace:true})
+                }else{
+                    onCreate(content, date, emotion);
+                    navigate("/", {replace:true});
+                }
+            }else{
+                return;
+            }
         }
     }
 
     return (
         <div className="DiaryEditor">
-            <MyHeader headText={"새 일기쓰기"} leftChild={<MyButton type={"positive"} onClick={() => navigate(-1)} text={"뒤로 가기"}/>} />
+            <MyHeader headText={isEdit ? "일기 수정" : "새 일기쓰기"} leftChild={<MyButton type={"positive"} onClick={() => navigate(-1)} text={"뒤로 가기"}/>} />
             <section>
                 <div className="input_box">
                     <h4>오늘은 며칠인가요?</h4>
