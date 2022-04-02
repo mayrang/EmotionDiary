@@ -1,3 +1,5 @@
+import React from "react";
+
 
 const MyHeader = ({headText, leftChild, rightChild}) => {
     return (
@@ -16,4 +18,4 @@ const MyHeader = ({headText, leftChild, rightChild}) => {
     );
 }
 
-export default MyHeader;
+export default React.memo(MyHeader);

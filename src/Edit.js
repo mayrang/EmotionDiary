@@ -10,7 +10,6 @@ const Edit = () => {
     const [originData, setOriginData] = useState();
 
     const navigete = useNavigate();
-    console.log("test")
     useEffect(()=>{
         if(diaryList.length > 1){
             const targetData = diaryList.find((it)=>(it.id) === parseInt(id));
@@ -23,7 +22,6 @@ const Edit = () => {
         }
         
     },[diaryList, id]);
-    console.log(originData);
     return (
         <div>
             {originData && <DiaryEditor isEdit={true} originData={originData}/>}

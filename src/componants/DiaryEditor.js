@@ -1,4 +1,4 @@
-import {useContext, useState, useRef, useEffect} from "react";
+import React, {useCallback, useContext, useState, useRef, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatctContext } from "../App.js";
 import MyButton from "./MyButton.js";
@@ -6,14 +6,14 @@ import MyHeader from "./MyHeader.js";
 import { emtionList } from "../utils/emotionList.js";
 
 
-const EmotionItem = ({onClick, emotion_id, emotion_src, emotion_description, isSelected}) => {
+const EmotionItem = React.memo(({onClick, emotion_id, emotion_src, emotion_description, isSelected}) => {
     return (
         <div className={["EmotionItem", isSelected ? `EmotionItem_on_${emotion_id}` : "EmotionItem_off"].join(" ")} onClick={() => onClick(emotion_id)}>
             <img src={emotion_src} alt="error" />
             <span>{emotion_description}</span>
         </div>
     );
-}
+});
 
 
 const DiaryEditor = ({isEdit, originData}) => {
@@ -30,18 +30,18 @@ const DiaryEditor = ({isEdit, originData}) => {
         }
         
     }, [originData, isEdit]);
-    const changeDate = (e) => {
+    const changeDate = useCallback((e) => {
         setDate(e.target.value);
-    }
+    }, []);
     const navigate = useNavigate();
 
-    const clickEmotion = (id)=>{
+    const clickEmotion = useCallback((id)=>{
         setEmotion(parseInt(id));
-    }
+    }, []);
 
-    const changeContent = (e) => {
+    const changeContent = useCallback((e) => {
         setContent(e.target.value);
-    }
+    }, []);
 
     const handleSubmit = () => {
         if(content.length < 5){
@@ -95,4 +95,4 @@ const DiaryEditor = ({isEdit, originData}) => {
     );
 }
 
-export default DiaryEditor;
+export default React.memo(DiaryEditor);

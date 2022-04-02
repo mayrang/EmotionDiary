@@ -1,4 +1,4 @@
-import {useState} from "react"
+import React, {useState} from "react"
 import { useNavigate } from "react-router-dom";
 import DiaryItem from "./DiaryItem.js"
 import MyButton from "./MyButton.js";
@@ -14,13 +14,13 @@ const sortEmotionList = [
     {value: "high", name: "좋은 감정만"}
 ]
 
-const ControlMenu = ({value, onChange, optionList}) => {
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
     return (
         <select className="ControlMenu" onChange={(e)=>onChange(e.target.value)} value={value}>
             {optionList.map((it,idx) => <option key={idx} value={it.value}>{it.name}</option>)}
         </select>
     )
-}
+});
 
 const DiaryList = ({diaryList}) => {
     const nevigate = useNavigate();
@@ -67,4 +67,4 @@ const DiaryList = ({diaryList}) => {
     );  
 }
 
-export default DiaryList;
+export default React.memo(DiaryList);

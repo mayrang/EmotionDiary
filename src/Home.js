@@ -9,12 +9,12 @@ const Home = () => {
     const diaryList = useContext(DiaryStateContext);
     const [data, setData] = useState([]);
     const [month, setMonth] = useState(new Date());
-    const headText = `${month.getFullYear()}년 ${month.getMonth()}월`
+    const headText = `${month.getFullYear()}년 ${month.getMonth()+1}월`
 
     useEffect(()=>{
         const firstDay = new Date(month.getFullYear(), month.getMonth(), 1).getTime();
-        const lastDay = new Date(month.getFullYear(), month.getMonth()+1, 0).getTime();
-        setData(diaryList.filter((it)=>firstDay <= it.date <= lastDay));
+        const lastDay = new Date(month.getFullYear(), month.getMonth()+1, 0, 23, 59, 59).getTime();
+        setData(diaryList.filter((it)=>parseInt(firstDay) <= parseInt(it.date) && parseInt(it.date) <= parseInt(lastDay)));
     }, [diaryList, month]);
 
     const monthIncrease = useCallback(() => {

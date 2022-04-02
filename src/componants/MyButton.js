@@ -1,3 +1,5 @@
+import React from "react";
+
 
 const MyButton = ({type, onClick, text}) => {
 
@@ -8,4 +10,4 @@ const MyButton = ({type, onClick, text}) => {
     );
 }
 
-export default MyButton;
+export default React.memo(MyButton) ;
