@@ -3,9 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DiaryStateContext } from "./App";
 import DiaryEditor from "./componants/DiaryEditor";
 
-const reducer = (state, action) => {
-    return action.data;
-}
 
 const Edit = () => {
     const {id} = useParams();
