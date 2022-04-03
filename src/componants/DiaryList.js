@@ -33,9 +33,9 @@ const DiaryList = ({diaryList}) => {
 
         const filterCallBack = (item) => {
             if(sortEmotion === "high"){
-                return item.emtion >= 3;
+                return item.emotion <= 3;
             }else if(sortEmotion === "low"){
-                return item.emotion < 3;
+                return item.emotion > 3;
             }
         }
         
